@@ -47,8 +47,8 @@
     <!-- Jumbotron -->
     <div class="jumbotron text-center">
         <img src="img/hasanlingkaran.png" class="img-circle">
-        <h1>Hasan Wirayuda</h1>
-        <p>Mahasiswa | Junior Developer</p>
+        <h1 class="display-4">Hasan Wirayuda</h1>
+        <p class="lead"></p>
     </div>
     <!-- Akhir Jumbotron -->
 
@@ -142,11 +142,6 @@
                             <label for="telp">No Telepon</label>
                             <input type="tel" id="telp" class="form-control" placeholder="masukan no telepon" name="telepon">
                         </div>
-                        <select class="form-control" name="kategori">
-                            <option>-- Pilih Kategori --</option>
-                            <option>Web Design</option>
-                            <option>Web Developer</option>
-                        </select>
                         <div class="form-group">
                             <label for="pesan">Pesan</label>
                             <textarea class="form-control" rows="10" placeholder="masukan pesan" name="pesan"></textarea>
@@ -184,16 +179,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
 
+    <!-- Gsap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/TextPlugin.min.js"></script>
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwBOtcaOBoE1_6JGgrWQXYy5dhuwlDNWcvJH0KxbD2gZyeZTn0j8kkXi1XpsOYPPk6h/exec'
-        const form = document.forms['hasan-contact-form']
+        gsap.registerPlugin(TextPlugin);
+        gsap.to(".lead", { duration: 3, delay: 1.5, text: "Mahasiswa | Junior Programming" });
+        gsap.from(".jumbotron img", { duration: 1, rotateY: 360, opacity: 0 });
+        gsap.from(".display-4", { duration: 1, x: -50, opacity: 0, delay: 0.5, ease: "back" });
+    </script>
+
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwBOtcaOBoE1_6JGgrWQXYy5dhuwlDNWcvJH0KxbD2gZyeZTn0j8kkXi1XpsOYPPk6h/exec';
+        const form = document.forms['hasan-contact-form'];
       
-        form.addEventListener('submit', e => {
-          e.preventDefault()
-          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => console.log('Success!', response))
-            .catch(error => console.error('Error!', error.message))
-        })
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          fetch(scriptURL, { method: "POST", body: new FormData(form) })
+            .then((response) => {
+                // reset formnya
+                form.reset();
+                console.log('Success!', response);
+            })
+            .catch((error) => console.error("Error!", error.message));
+        });
       </script>
   </body>
 </html>
